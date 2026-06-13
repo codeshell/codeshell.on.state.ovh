@@ -1,17 +1,17 @@
-site_name: $site_name # Change this to your site name
-site_description: $site_description
-site_url: $site_url # Change this to your site URL
-site_author: $site_author
+site_name: "codeshell | TMW"
+site_description: "Guides, scripts, snippets and discussions on dev topics."
+site_url: https://codeshell.on.state.ovh
+site_author: codeshell
 
 theme:
     name: 'material'
     logo: _assets/meta/logo.png
     favicon: _assets/meta/favicons.png
-    custom_dir: overrides
+    #custom_dir: overrides
     font:
         text: Karla
         code: Ubuntu Mono
-    language: $language
+    language: en
     palette:
     # Light mode
     - media: "(prefers-color-scheme: light)"
@@ -129,9 +129,9 @@ extra_css:
     - https://cdn.jsdelivr.net/gh/Enveloppe/_static@refs/heads/master/dist/styles.css
 extra:
   SEO: '_assets/meta/logo.png'
-  comments: $comments
+  comments: true
   attachments: '_assets/img/'
-  no-auto-h1: $auto_h1
+  no-auto-h1: false
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Enveloppe/
@@ -144,7 +144,7 @@ extra:
     strip_comments: true
     fix_heading: true
   icons:
-    folder: "icons/" #from root _assets ; see overrides/partials/nav-item.html and overrides/partials/tabs-item.html
+    folder: "_assets/icons/" #from root _assets ; see overrides/partials/nav-item.html and overrides/partials/tabs-item.html
     default:
       file: "file.svg"
       folder: "folder-open.svg"
