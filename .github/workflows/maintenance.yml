@@ -1,8 +1,8 @@
-name: Repository maintenance
+name: Maintain & Deploy (Fr)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * 5"
 permissions:
   contents: write
   pages: write
@@ -10,12 +10,12 @@ permissions:
 
 jobs:
   maintenance:
-    uses: Enveloppe/wiki/.github/workflows/maintenance.yml@main
+    uses: ./maintenance.tpl.yml
     with:
       BRANCH: main
-      CLEAN: true
+      CLEAN: false
       UPDATE_REQUIREMENTS: true
-      OPTIMIZE_IMAGES: true
+      OPTIMIZE_IMAGES: false
     secrets:
       GH_PAT: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
       AUTHOR_EMAIL: ${{ secrets.author_email || 'github-actions[bot]@users.noreply.github.com' }}
@@ -23,7 +23,7 @@ jobs:
   deploy:
     needs: maintenance
     if: ${{ success() }}
-    uses: Enveloppe/wiki/.github/workflows/deploy.yml@main
+    uses: ./deploy.yml
     with:
       FETCH_SUBMODULE: false #change this if you use submodules
     secrets:
