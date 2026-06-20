@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   maintenance:
-    uses: ./maintenance.tpl.yml
+    uses: ./.github/workflows/maintenance.tpl.yml
     with:
       BRANCH: main
       CLEAN: false
@@ -23,7 +23,7 @@ jobs:
   deploy:
     needs: maintenance
     if: ${{ success() }}
-    uses: ./deploy.yml
+    uses: ./.github/workflows/deploy.yml
     with:
       FETCH_SUBMODULE: false #change this if you use submodules
     secrets:
