@@ -2,8 +2,13 @@ name: Publish Documentation
 on:
   push:
     branches:
-      - main-enable-after-migration
+      - main
+    paths: 
+      - 'overrides/**'
+      - 'includes/**'
+      - 'docs/**'
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
