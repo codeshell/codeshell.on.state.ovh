@@ -6,6 +6,7 @@ on:
     paths: 
       - 'overrides/**'
       - 'includes/**'
+      - 'docs' # contains submodule pointer
       - 'docs/**'
   pull_request:
     types:
@@ -13,6 +14,7 @@ on:
     branches:
       - main
     paths: 
+      - 'docs' # contains submodule pointer
       - 'docs/**'
   workflow_dispatch:
   workflow_call:
