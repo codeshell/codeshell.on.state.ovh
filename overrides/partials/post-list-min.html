@@ -3,9 +3,6 @@
 {% if not "\x3ch1" in page.content %}
     <h1>{{ page.title | d(config.site_name, true) }}</h1>
 {% endif %}
-{# .......... debug #}
-{% from "macros/debug-page.html" import debug_page %}
-{{ debug_page(page) }}
 {# .......... description #}
 <p>{{ page.content }}</p>
 {# .......... config pagination #}

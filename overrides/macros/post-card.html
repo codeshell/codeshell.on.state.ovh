@@ -2,12 +2,14 @@
     {% set pg_image = "" %}
     {% set pg_category = "" %}
     {% set pg_description = "" %}
+    {% set pg_tags = "" %}
+    {% set pg_author = "" %}
+    {% set pg_parent = "" %}
     {% set category_link = "" %}
     {% set pg_title = pg.title %}
     {% if pg_title == "Index" %}
         {% set pg_title = pg.parent.title %}
     {% endif %}
-    {% set main_category = page.meta.category | first | lower %}
     {% if pg.meta %}
         {% if pg.meta.date %}
             {% set pg_date_new = pg.meta.date %}
@@ -29,7 +31,7 @@
             {% set pg_image = config.site_url ~ attachmentsFolder ~ '/' ~ pg.meta.image %}
         {% endif %}
         {% if pg.meta.category %}
-            {% set pg_category = pg.meta.category | lower | replace(main_category, '') | replace('/', '') | title %}
+            {% set pg_category = pg.meta.category | title %}
             {% if pg_category | length > 1 %}
                 {% set category_link = config.docs_dir ~ "/" ~ page.meta.category ~ '/' ~ pg_category ~ '/index.md' %}
                 {# set category_exists = category_link | page_exists #}
@@ -41,8 +43,21 @@
                 {% endif %}
             {% endif %}
         {% endif %}
+        {% if pg.meta.author %}
+            {% set pg_author = pg.meta.author %}
+        {% endif %}
+        {% if pg.meta.parent %}
+            {% set pg_parent = pg.meta.parent %}
+        {% endif %}
+        {% if pg.meta.tags %}
+            {% set pg_tags = pg.meta.tags|join(", ") %}
+        {% endif %}
         {% if pg.meta.description %}
-            {% set pg_description = pg.meta.description | escape %}
+            {% set pg_description = pg.meta.description[:200] ~ '...' %}
+        {% elif pg.meta.summary %}
+            {% set pg_description = pg.meta.summary[:200] ~ '...' %}
+        {% else %}
+            {% set pg_description = 'No description.' %}
         {% endif %}
     {% endif %}
     <div class="post">
@@ -51,21 +66,33 @@
         </h4>
         <div class="post-info-wrap">
             <div class="post-info">
-                <p class="post-description">{{ pg_description }}</p>
+                <p class="post-description"><em>{{ pg_description | escape }}</em></p>
                 <div class="post-extra row">
                     <div class="col">
                         <p class="post-date">
                             <span class="twemoji">{% include ".icons/material/calendar.svg" %}</span>
-                            <span class="icon-text">{{ pg_date_new }}</span>
+                            <span class="icon-text">{{ pg_date_new|split("T")|first }}</span>
                             {% if pg_date_mod %}
-                            <span class="twemoji">{% include ".icons/material/calendar.svg" %}</span>
-                            <span class="icon-text"><em>{{ pg_date_mod }}</em></span>
+                            <span class="twemoji">{% include ".icons/material/update.svg" %}</span>
+                            <span class="icon-text"><em>{{ pg_date_mod|split("T")|first }}</em></span>
+                            {% endif %}
+                            {% if pg_author %}
+                            <span class="twemoji">{% include ".icons/material/account.svg" %}</span>
+                            <span class="icon-text">{{ pg_author }}</span>
                             {% endif %}
                             {% if pg_category | length > 1 %}
                                 <span class="post-category">
                                     <span class="twemoji">{% include ".icons/material/folder.svg" %}</span>
                                     {{ pg_category }}
                                 </span>
+                            {% endif %}
+                            {% if pg_parent %}
+                            <span class="twemoji">{% include ".icons/material/arrow-up-right.svg" %}</span>
+                            <span class="icon-text">{{ pg_parent }}</span>
+                            {% endif %}
+                            {% if pg_tags %}
+                            <span class="twemoji">{% include ".icons/material/tag-multiple-outline.svg" %}</span>
+                            <span class="icon-text">{{ pg_tags }}</span>
                             {% endif %}
                         </p>
                     </div>

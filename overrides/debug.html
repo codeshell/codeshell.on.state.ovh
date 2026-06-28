@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+{# .......... debug #}
+{% from "macros/debug-page.html" import debug_page %}
+{{ debug_page(page) }}
     {% set main_category = page.meta.category | lower %}
     <div>main_category identified as "{{ main_category }}"</div>
     {% set uses_macros = page.meta.render_macros %}
