@@ -1,0 +1,6 @@
+{% macro debug_page(pg) %}
+<details>
+  <summary>Debug page ({{ pg.url }})</summary>
+  <pre><code class="language-json">{{ pg|pprint }}</code></pre>
+</details>
+{% endmacro %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    {% set main_category = page.meta.category | lower %}
+    <div>main_category identified as "{{ main_category }}"</div>
+    {% set uses_macros = page.meta.render_macros %}
+    <div>uses_macros identified as "{{ uses_macros }}"</div>
+    {% if main_category == "all" %}
+        {# empty #}
+    {% endif %}
+    <p>Based on default template.render context in <a href="https://github.com/zensical/zensical/blob/master/crates/zensical/src/template.rs#L101">template.rs</a></p>
+    {% if uses_macros == true %}
+        <!-- This does not work. macros seems to be totally broken with template files. -->
+        <!-- Only pasting template code directly into the source markdown file (docs) recognizes "macros". -->
+        <!-- That makes zero sense. All templates must stay outside the docs repository. -->
+        <h2>context()</h2>
+        <div>{{ context() | pretty }}</div>
+        <h2>macros_info()</h2>
+        <div>{{ macros_info() | pretty }}</div>
+        <h2>git</h2>
+        <div>{{ git | pretty }}</div>
+    {% else %}
+        <h2>generator</h2>
+        <div>{{ generator }}</div>
+        <h2>nav</h2>
+        <div>{{ nav }}</div>
+        <h2>pages</h2>
+        <div>{{ pages }}</div>
+        <h2>base_url</h2>
+        <div>{{ base_url }}</div>
+        <h2>extra_css</h2>
+        <div>{{ extra_css }}</div>
+        <h2>extra_javascript</h2>
+        <div>{{ extra_javascript }}</div>
+        <h2>config</h2>
+        <div>{{ config }}</div>
+        <h2>page</h2>
+        <pre><code>{{ page }}</code></pre>
+    {% endif %}
+{% endblock %}

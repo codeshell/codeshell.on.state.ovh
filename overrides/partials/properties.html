@@ -1,0 +1,34 @@
+{# this is re-using macros from partials/source-file.html so that one MUST be loaded first in content.html #}
+
+{% if page.meta %}
+  {% if page.meta.date %}
+    {% set created = page.meta.date %}
+  {% elif page.meta.created %}
+    {% set created = page.meta.created %}
+  {% endif %}
+  {% if page.meta.lastmod %}
+    {% set updated = page.meta.lastmod %}
+  {% endif %}
+  {% if page.meta.author %}
+    {% set author = page.meta.author %}
+  {% endif %}
+  {% if page.meta.authors %}
+    {% set authors = page.meta.authors %}
+  {% endif %}
+{% endif %}
+{% if updated or created or git_info or committers %}
+  <aside class="tmw-properties">
+    {% if created %}
+      {{ render_created(created) }}
+    {% endif %}
+    {% if updated %}
+      {{ render_updated(updated) }}
+    {% endif %}
+    {% if author %}
+      {{ author }}
+    {% endif %}
+    {% if authors %}
+      {{ render_committers(authors) }}
+    {% endif %}
+  </aside>
+{% endif %}
