@@ -42,7 +42,7 @@
             {% endif %}
         {% endif %}
         {% if pg.meta.description %}
-            {% set pg_description = pg.meta.description | truncate(200) %}
+            {% set pg_description = pg.meta.description | escape %}
         {% endif %}
     {% endif %}
     <div class="post">
