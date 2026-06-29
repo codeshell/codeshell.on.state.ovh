@@ -154,11 +154,7 @@ custom_checkbox = true
 #modules = ["tmw-macros.on_env", "tmw-macros.on_page_markdown", "tmw-macros.on_post_page", "tmw-macros.does-not-exist"]
 
 [[project.markdown_extensions.zensical.extensions.preview.configurations]]
-targets.include = [
-    "setup/extensions/*",
-    "blog/*",
-    "guides/*",
-    "topics/*",
-    "wiki/*",
-    "index.md",
-]
+#sources.include = ["/*"]
+sources.exclude = ["hidden/*"]
+#targets.include = ["blog/*","guides/*","topics/*","wiki/*","index.md","README.md"]
+targets.exclude = ["hidden/*"]
